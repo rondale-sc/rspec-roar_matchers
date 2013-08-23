@@ -40,7 +40,7 @@ end
 ### have_properties
 
 ```ruby
-context "link is present in both spec and representer (happy path)" do
+context "property is present in both spec and representer (happy path)" do
   it "passes" do
     expected_properties = %w{name}
     expect(country.extend(CountryRepresenter)).to have_properties(expected_properties)
