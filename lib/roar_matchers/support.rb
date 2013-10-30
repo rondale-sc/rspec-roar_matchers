@@ -13,9 +13,13 @@ module RoarMatchers
     end.map(&:name)
   end
 
-  def self.get_actual_link_names(representer)
-    representer.to_json;
+  def self.get_actual_link_names(representer, options={})
+    representer.to_json(options);
     representer.links.keys
+  end
+
+  def self.extract_options!(args)
+    args.last.is_a?(::Hash) ? args.pop : {}
   end
 
   def self.get_actual_collection_names(representer)

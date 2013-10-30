@@ -1,10 +1,12 @@
 RSpec::Matchers.define :have_links do |expected_links|
+  options = RoarMatchers.extract_options!(expected_links)
+
   match do |representer|
     first = expected_links.all? do |expected_link|
-      RoarMatchers.get_actual_link_names(representer).include?(expected_link)
+      RoarMatchers.get_actual_link_names(representer, options).include?(expected_link)
     end
 
-    second = RoarMatchers.get_actual_link_names(representer).all? do |expected_link|
+    second = RoarMatchers.get_actual_link_names(representer, options).all? do |expected_link|
       expected_links.include?(expected_link)
     end
 
@@ -12,7 +14,9 @@ RSpec::Matchers.define :have_links do |expected_links|
   end
 
   failure_message_for_should do |representer|
-    actual_link_names = RoarMatchers.get_actual_link_names(representer)
+    opts = opts || {}
+
+    actual_link_names = RoarMatchers.get_actual_link_names(representer, opts)
     representation_or_specification, missing = RoarMatchers.missing(actual_link_names,expected_links)
 
     (<<-EOS)
