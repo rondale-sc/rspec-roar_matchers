@@ -1,5 +1,6 @@
-RSpec::Matchers.define :have_links do |expected_links|
-  options = RoarMatchers.extract_options!(expected_links)
+RSpec::Matchers.define :have_links do |*expected|
+  expected_links = expected.shift
+  options = RoarMatchers.extract_options!(expected)
 
   match do |representer|
     first = expected_links.all? do |expected_link|
