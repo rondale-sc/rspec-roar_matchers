@@ -8,9 +8,9 @@ module RoarMatchers
   end
 
   def self.get_actual_property_names(representer)
-    representer.instance_variable_get("@representable_attrs").reject do |attr|
-      attr.options[:collection]
-    end.map(&:name)
+    representer.instance_variable_get("@representable_attrs").reject do |key, attrs|
+      attrs.options[:collection]
+    end.keys
   end
 
   def self.get_actual_link_names(representer, options={})
@@ -23,8 +23,8 @@ module RoarMatchers
   end
 
   def self.get_actual_collection_names(representer)
-    representer.instance_variable_get("@representable_attrs").select do |attr|
-      attr.options[:collection] && attr.name != "links_array"
-    end.map(&:name)
+    representer.instance_variable_get("@representable_attrs").select do |key, attrs|
+      attrs.options[:collection] && attrs.name != "links_array"
+    end.keys
   end
 end
