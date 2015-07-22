@@ -11,9 +11,9 @@ RSpec::Matchers.define :have_properties do |expected_properties|
     first && second
   end
 
-  failure_message_for_should do |representer|
+  failure_message do |representer|
     actual_property_names = RoarMatchers.get_actual_property_names(representer)
-    representation_or_specification, missing = RoarMatchers.missing(actual_property_names,expected_properties)
+    representation_or_specification, missing = RoarMatchers.missing(actual_property_names, expected_properties)
 
     (<<-EOS)
       expected that #{actual_property_names}
