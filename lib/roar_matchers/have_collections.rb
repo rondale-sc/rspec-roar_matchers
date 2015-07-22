@@ -11,7 +11,7 @@ RSpec::Matchers.define :have_collections do |expected_collections|
     first && second
   end
 
-  failure_message_for_should do |representer|
+  failure_message do |representer|
     actual_collection_names = RoarMatchers.get_actual_collection_names(representer)
     representation_or_specification, missing = RoarMatchers.missing(actual_collection_names, expected_collections)
 

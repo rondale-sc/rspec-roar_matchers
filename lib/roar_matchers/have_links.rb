@@ -14,11 +14,11 @@ RSpec::Matchers.define :have_links do |*expected|
     first && second
   end
 
-  failure_message_for_should do |representer|
-    opts = opts || {}
+  failure_message do |representer|
+    opts ||= {}
 
     actual_link_names = RoarMatchers.get_actual_link_names(representer, opts)
-    representation_or_specification, missing = RoarMatchers.missing(actual_link_names,expected_links)
+    representation_or_specification, missing = RoarMatchers.missing(actual_link_names, expected_links)
 
     (<<-EOS)
       expected that #{actual_link_names}
